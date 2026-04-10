@@ -161,10 +161,47 @@ const vocabulary = [
     { hiragana: "たります", romaji: "tarimasu", kanji: "足ります", sinhala: "සෑහෙනවා, ඇති වෙනවා" }
 ];
 
+// DOM Elements
+const homeScreen = document.getElementById('home-screen');
+const studyScreen = document.getElementById('study-screen');
+const practiceScreen = document.getElementById('practice-screen');
+const endScreen = document.getElementById('end-screen');
+
+const btnStudy = document.getElementById('btn-study');
+const btnPractice = document.getElementById('btn-practice');
+const btnBackFromStudy = document.getElementById('btn-back-from-study');
+const btnBackFromPractice = document.getElementById('btn-back-from-practice');
+const btnNext = document.getElementById('btn-next');
+const btnPlayAgain = document.getElementById('btn-play-again');
+const btnHomeFromEnd = document.getElementById('btn-home-from-end');
+
 const vocabListContainer = document.getElementById('vocab-list-container');
 
-// Only run after DOM content is loaded just in case, though script is at the end
+// Game Elements
+const progressFill = document.getElementById('progress-fill');
+const questionKanji = document.getElementById('question-kanji');
+const questionRomaji = document.getElementById('question-romaji');
+const optionsContainer = document.getElementById('options-container');
+const feedbackContainer = document.getElementById('feedback-container');
+const scoreEl = document.getElementById('score');
+const finalScoreEl = document.getElementById('final-score');
+const totalQuestionsEl = document.getElementById('total-questions');
+
+// Game State
+let currentQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let currentCorrectAnswer = null;
+
+// Routing
+function showScreen(screenEl) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    screenEl.classList.add('active');
+}
+
+// Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    // Populate Study List
     vocabulary.forEach((word, index) => {
         const jpText = word.kanji !== word.hiragana ? `${word.kanji} (${word.hiragana})` : word.hiragana;
         const item = document.createElement('div');
@@ -176,4 +213,110 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         vocabListContainer.appendChild(item);
     });
+
+    // Event Listeners
+    btnStudy.addEventListener('click', () => showScreen(studyScreen));
+    btnPractice.addEventListener('click', () => startGame());
+    
+    btnBackFromStudy.addEventListener('click', () => showScreen(homeScreen));
+    btnBackFromPractice.addEventListener('click', () => showScreen(homeScreen));
+    btnHomeFromEnd.addEventListener('click', () => showScreen(homeScreen));
+
+    btnPlayAgain.addEventListener('click', () => startGame());
+    btnNext.addEventListener('click', () => loadNextQuestion());
 });
+
+// Game Logic
+function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function startGame() {
+    score = 0;
+    currentIndex = 0;
+    scoreEl.textContent = score;
+    
+    // Select random questions for all verbs
+    currentQuestions = shuffleArray(vocabulary);
+    
+    showScreen(practiceScreen);
+    loadNextQuestion();
+}
+
+function loadNextQuestion() {
+    if (currentIndex >= currentQuestions.length) {
+        endGame();
+        return;
+    }
+
+    feedbackContainer.classList.add('hidden');
+    optionsContainer.innerHTML = '';
+    
+    const currentWord = currentQuestions[currentIndex];
+    currentCorrectAnswer = currentWord;
+    
+    // Update Question UI - User wants to see Hiragana
+    questionKanji.textContent = currentWord.hiragana;
+    questionRomaji.textContent = currentWord.romaji;
+    
+    // Update Progress
+    const progressPercent = (currentIndex / currentQuestions.length) * 100;
+    progressFill.style.width = `${progressPercent}%`;
+
+    // Generate Options
+    let incorrectWords = vocabulary.filter(w => w.hiragana !== currentWord.hiragana);
+    incorrectWords = shuffleArray(incorrectWords).slice(0, 3);
+    
+    let options = [currentWord, ...incorrectWords];
+    options = shuffleArray(options);
+
+    options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `
+            <div>${opt.sinhala}</div>
+        `;
+        btn.addEventListener('click', () => handleAnswer(opt, btn));
+        optionsContainer.appendChild(btn);
+    });
+}
+
+function handleAnswer(selectedOpt, selectedBtn) {
+    const isCorrect = selectedOpt.hiragana === currentCorrectAnswer.hiragana;
+    
+    // Disable all buttons
+    const allBtns = optionsContainer.querySelectorAll('.option-btn');
+    allBtns.forEach(btn => btn.disabled = true);
+
+    if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        score++;
+        scoreEl.textContent = score;
+    } else {
+        selectedBtn.classList.add('wrong');
+        // Find and highlight correct answer
+        allBtns.forEach(btn => {
+            if (btn.querySelector('div').textContent === currentCorrectAnswer.sinhala) {
+                btn.classList.add('correct');
+            }
+        });
+    }
+
+    feedbackContainer.classList.remove('hidden');
+    currentIndex++;
+    
+    // Update progress bar to include the answer just given
+    const progressPercent = (currentIndex / currentQuestions.length) * 100;
+    progressFill.style.width = `${progressPercent}%`;
+}
+
+function endGame() {
+    finalScoreEl.textContent = score;
+    totalQuestionsEl.textContent = currentQuestions.length;
+    showScreen(endScreen);
+}

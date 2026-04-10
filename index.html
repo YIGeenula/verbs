@@ -21,11 +21,62 @@
 
         <main class="glass-panel"
             style="padding: 24px; min-height: auto; max-height: calc(100vh - 120px); display: flex; flex-direction: column;">
-            <div id="study-screen" class="screen scrollable-screen active" style="flex: 1;">
+            
+            <div id="home-screen" class="screen active">
+                <div class="icon-wrapper">🎮</div>
+                <h2 style="text-align: center;">Nihongo Verbs</h2>
+                <p style="text-align: center;">Choose an option below to start.</p>
+                <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 30px; width: 100%;">
+                    <button id="btn-study" class="primary-btn">📚 Study Verbs</button>
+                    <button id="btn-practice" class="secondary-btn">🎯 Practice Verbs (Game)</button>
+                </div>
+            </div>
+
+            <div id="study-screen" class="screen scrollable-screen" style="flex: 1;">
+                <div class="header-actions">
+                    <button id="btn-back-from-study" class="icon-btn">← Back</button>
+                    <h2>Study Verbs</h2>
+                </div>
                 <div id="vocab-list-container" class="vocab-list">
                     <!-- Injected via JS -->
                 </div>
             </div>
+
+            <div id="practice-screen" class="screen" style="flex: 1; flex-direction: column;">
+                <div class="header-actions">
+                    <button id="btn-back-from-practice" class="icon-btn">← Back</button>
+                    <div style="flex: 1; text-align: center; font-weight: 600;">Score: <span id="score">0</span></div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div id="progress-fill"></div>
+                </div>
+
+                <div class="question-container">
+                    <span class="question-label">What is the meaning of:</span>
+                    <div id="question-kanji" class="question">起きます</div>
+                    <div id="question-romaji" class="subtext">okimasu</div>
+                </div>
+
+                <div id="options-container" class="options-container">
+                    <!-- Buttons injected via JS -->
+                </div>
+
+                <div id="feedback-container" class="feedback-container hidden">
+                    <button id="btn-next" class="next-btn">Next Question →</button>
+                </div>
+            </div>
+
+            <div id="end-screen" class="screen">
+                <div class="icon-wrapper">🎉</div>
+                <h2 style="text-align: center;">Practice Complete!</h2>
+                <p style="text-align: center;">You scored <span id="final-score" class="highlight-score">0</span> out of <span id="total-questions" class="highlight-score">0</span></p>
+                <div style="margin-top: 30px; width: 100%; display: flex; flex-direction: column; gap: 10px;" class="mt-20">
+                    <button id="btn-play-again" class="primary-btn" style="width: 100%;">Practice Again</button>
+                    <button id="btn-home-from-end" class="secondary-btn" style="width: 100%;">Back to Home</button>
+                </div>
+            </div>
+
         </main>
     </div>
     <script src="script.js"></script>
