@@ -163,12 +163,14 @@ const vocabulary = [
 
 // DOM Elements
 const homeScreen = document.getElementById('home-screen');
+const selectSetScreen = document.getElementById('select-set-screen');
 const studyScreen = document.getElementById('study-screen');
 const practiceScreen = document.getElementById('practice-screen');
 const endScreen = document.getElementById('end-screen');
 
 const btnStudy = document.getElementById('btn-study');
 const btnPractice = document.getElementById('btn-practice');
+const btnBackFromSelect = document.getElementById('btn-back-from-select');
 const btnBackFromStudy = document.getElementById('btn-back-from-study');
 const btnBackFromPractice = document.getElementById('btn-back-from-practice');
 const btnNext = document.getElementById('btn-next');
@@ -176,6 +178,8 @@ const btnPlayAgain = document.getElementById('btn-play-again');
 const btnHomeFromEnd = document.getElementById('btn-home-from-end');
 
 const vocabListContainer = document.getElementById('vocab-list-container');
+const setListContainer = document.getElementById('set-list-container');
+const selectSetTitle = document.getElementById('select-set-title');
 
 // Game Elements
 const progressFill = document.getElementById('progress-fill');
@@ -192,6 +196,9 @@ let currentQuestions = [];
 let currentIndex = 0;
 let score = 0;
 let currentCorrectAnswer = null;
+let currentMode = ''; // 'study' or 'practice'
+let currentSetStartIndex = 0;
+let currentSetEndIndex = 0;
 
 // Routing
 function showScreen(screenEl) {
@@ -201,30 +208,71 @@ function showScreen(screenEl) {
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
-    // Populate Study List
-    vocabulary.forEach((word, index) => {
+    // Generate Set Buttons
+    const setSize = 20;
+    const numSets = Math.ceil(vocabulary.length / setSize);
+    
+    for (let i = 0; i < numSets; i++) {
+        const start = i * setSize;
+        const end = Math.min((i + 1) * setSize, vocabulary.length);
+        
+        const btn = document.createElement('button');
+        btn.className = 'secondary-btn';
+        btn.textContent = `Set ${i + 1} (${start + 1} - ${end})`;
+        btn.addEventListener('click', () => selectSet(start, end));
+        setListContainer.appendChild(btn);
+    }
+
+    // Event Listeners
+    btnStudy.addEventListener('click', () => {
+        currentMode = 'study';
+        selectSetTitle.textContent = 'Select Study Set';
+        showScreen(selectSetScreen);
+    });
+    
+    btnPractice.addEventListener('click', () => {
+        currentMode = 'practice';
+        selectSetTitle.textContent = 'Select Practice Set';
+        showScreen(selectSetScreen);
+    });
+    
+    btnBackFromSelect.addEventListener('click', () => showScreen(homeScreen));
+    btnBackFromStudy.addEventListener('click', () => showScreen(selectSetScreen));
+    btnBackFromPractice.addEventListener('click', () => showScreen(selectSetScreen));
+    btnHomeFromEnd.addEventListener('click', () => showScreen(homeScreen));
+
+    btnPlayAgain.addEventListener('click', () => startGame(currentSetStartIndex, currentSetEndIndex));
+    btnNext.addEventListener('click', () => loadNextQuestion());
+});
+
+function selectSet(start, end) {
+    currentSetStartIndex = start;
+    currentSetEndIndex = end;
+    
+    if (currentMode === 'study') {
+        renderStudySet(start, end);
+        showScreen(studyScreen);
+    } else {
+        startGame(start, end);
+    }
+}
+
+function renderStudySet(start, end) {
+    vocabListContainer.innerHTML = '';
+    const subset = vocabulary.slice(start, end);
+    subset.forEach((word, index) => {
+        const actualIndex = start + index;
         const jpText = word.kanji !== word.hiragana ? `${word.kanji} (${word.hiragana})` : word.hiragana;
         const item = document.createElement('div');
         item.className = 'vocab-item';
         item.innerHTML = `
-            <div class="vocab-kanji"><span class="vocab-number" style="color:#aaa;font-size:0.8em;">${index + 1}. </span>${jpText}</div>
+            <div class="vocab-kanji"><span class="vocab-number" style="color:#aaa;font-size:0.8em;">${actualIndex + 1}. </span>${jpText}</div>
             <div class="vocab-romaji">${word.romaji}</div>
             <div class="vocab-sinhala">${word.sinhala}</div>
         `;
         vocabListContainer.appendChild(item);
     });
-
-    // Event Listeners
-    btnStudy.addEventListener('click', () => showScreen(studyScreen));
-    btnPractice.addEventListener('click', () => startGame());
-    
-    btnBackFromStudy.addEventListener('click', () => showScreen(homeScreen));
-    btnBackFromPractice.addEventListener('click', () => showScreen(homeScreen));
-    btnHomeFromEnd.addEventListener('click', () => showScreen(homeScreen));
-
-    btnPlayAgain.addEventListener('click', () => startGame());
-    btnNext.addEventListener('click', () => loadNextQuestion());
-});
+}
 
 // Game Logic
 function shuffleArray(array) {
@@ -236,13 +284,14 @@ function shuffleArray(array) {
     return arr;
 }
 
-function startGame() {
+function startGame(start = currentSetStartIndex, end = currentSetEndIndex) {
     score = 0;
     currentIndex = 0;
     scoreEl.textContent = score;
     
-    // Select random questions for all verbs
-    currentQuestions = shuffleArray(vocabulary);
+    // Select random questions for the selected set
+    const subset = vocabulary.slice(start, end);
+    currentQuestions = shuffleArray(subset);
     
     showScreen(practiceScreen);
     loadNextQuestion();
