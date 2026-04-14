@@ -161,6 +161,142 @@ const vocabulary = [
     { hiragana: "たります", romaji: "tarimasu", kanji: "足ります", sinhala: "සෑහෙනවා, ඇති වෙනවා" }
 ];
 
+const synonymsData = [
+    { word: "きらい", romaji: "kirai", synonym: "すき じゃ / ではありません", sinhala: "අකමැති" },
+    { word: "おととい", romaji: "ototoi", synonym: "ふつか まえ", sinhala: "පෙරේදා" },
+    { word: "きのう", romaji: "kinou", synonym: "いちにち まえ", sinhala: "ඊයේ" },
+    { word: "あした", romaji: "ashita", synonym: "あす、 いちにち ご", sinhala: "හෙට" },
+    { word: "あさって", romaji: "asatte", synonym: "ふつか ご", sinhala: "අනිද්දා" },
+    { word: "おじさん", romaji: "ojisan", synonym: "父 / 母の あに / おとうと", sinhala: "මාමා / බාප්පා / මහප්පා" },
+    { word: "おじいさん", romaji: "ojiisan", synonym: "父 / 母の ちち、 そふ", sinhala: "සීයා" },
+    { word: "おばさん", romaji: "obasan", synonym: "父 / 母の あね / いもうと", sinhala: "නැන්දා / පුංචි අම්මා / ලොකු අම්මා" },
+    { word: "おばあさん", romaji: "obaasan", synonym: "父 / 母の はは、 そぼ", sinhala: "ආච්චි" },
+    { word: "まずい", romaji: "mazui", synonym: "おいしくない、 すっぱい、 からい", sinhala: "රහ නෑ (අමිහිරි)" },
+    { word: "あまい", romaji: "amai", synonym: "おいしい", sinhala: "පැණිරස (රසවත්)" },
+    { word: "あまいもの", romaji: "amaimono", synonym: "おかし、 チョコレート", sinhala: "පැණිරස කෑම" },
+    { word: "ちょっと", romaji: "chotto", synonym: "すこし", sinhala: "ටිකක්" },
+    { word: "たくさん", romaji: "takusan", synonym: "いっぱい", sinhala: "ගොඩක්" },
+    { word: "はじめて", romaji: "hajimete", synonym: "すぐ、 いまから、 もうすぐ、 まず、 はじめに", sinhala: "පළමු වතාවට" },
+    { word: "りゅうがくせい", romaji: "ryuugakusei", synonym: "べんきょうしに がいこくへ いきました", sinhala: "විදේශීය සිසුවා" },
+    { word: "9じ はん", romaji: "9 ji han", synonym: "9じ 30ぷん 「はん=30ぷん」", sinhala: "9:30" },
+    { word: "きれい", romaji: "kirei", synonym: "すてき、 きたなくない", sinhala: "ලස්සන / පිරිසිදු" },
+    { word: "きたない", romaji: "kitanai", synonym: "ごみ", sinhala: "අපිරිසිදු" },
+    { word: "かんたん", romaji: "kantan", synonym: "むずかしくない、 やさしい", sinhala: "පහසු / ලේසි" },
+    { word: "たいへん", romaji: "taihen", synonym: "やりにくい、 むずかしい", sinhala: "අමාරු / දුෂ්කර" },
+    { word: "ながい", romaji: "nagai", synonym: "みじかくない", sinhala: "දිග" },
+    { word: "たいせつ", romaji: "taisetsu", synonym: "だいじ", sinhala: "වැදගත්" },
+    { word: "ざあざあ あめ", romaji: "zaazaa ame", synonym: "つよい あめ", sinhala: "තද වැස්ස" },
+    { word: "あいて います", romaji: "aite imasu", synonym: "しまって いません", sinhala: "ඇරලා තියෙනවා" },
+    { word: "かるい", romaji: "karui", synonym: "おもくない", sinhala: "සැහැල්ලු" },
+    { word: "ちいさい", romaji: "chiisai", synonym: "おおきくない", sinhala: "කුඩා / පොඩි" },
+    { word: "ごぜんちゅう", romaji: "gozenchuu", synonym: "あさから ひるまで", sinhala: "උදය වරුවම" },
+    { word: "ごごちゅう", romaji: "gogochuu", synonym: "ひるから よるまで", sinhala: "පස්වරුවම" },
+    { word: "いちにちじゅう", romaji: "ichinichijuu", synonym: "あさから よるまで", sinhala: "දවස පුරාම" },
+    { word: "すき", romaji: "suki", synonym: "したいです、 きらい じゃ / ではありません", sinhala: "කැමති" },
+    { word: "いなか", romaji: "inaka", synonym: "むら、 まち じゃ / ではありません", sinhala: "ගම" },
+    { word: "ひま", romaji: "hima", synonym: "いそがしくない、 じかんが あります", sinhala: "නිදහස් කාලය" },
+    { word: "なおします", romaji: "naoshimasu", synonym: "しゅうりします", sinhala: "අලුත්වැඩියා කරනවා / හරිගස්සනවා" },
+    { word: "ビル", romaji: "biru", synonym: "たてもの、 アパート", sinhala: "ගොඩනැගිල්ල / බිල්ඩිම" },
+    { word: "ちゅうしゃじょ", romaji: "chuushajo", synonym: "くるまを おきます", sinhala: "රථගාල" },
+    { word: "しんごう", romaji: "shingou", synonym: "くるまを とめます", sinhala: "මාර්ග සංඥා" },
+    { word: "こうさてん", romaji: "kousaten", synonym: "ひとが みちを わたります", sinhala: "මංසන්ධිය" },
+    { word: "きっさてん", romaji: "kissaten", synonym: "コーヒー / こちゃを のむところ", sinhala: "තේ කඩය / කෝපි කඩය" },
+    { word: "おゆ", romaji: "oyu", synonym: "あつい みず", sinhala: "උණු වතුර" },
+    { word: "さびしい", romaji: "sabishii", synonym: "どくしん、 じぶんで / ひとりで すみます", sinhala: "පාළු" },
+    { word: "ふべん", romaji: "fuben", synonym: "べんり じゃ / ではありません", sinhala: "අපහසු / පහසු නෑ" },
+    { word: "すごい", romaji: "sugoi", synonym: "とても いい", sinhala: "නියමයි" },
+    { word: "ほんとう", romaji: "hontou", synonym: "うそ じゃ / ではありません", sinhala: "ඇත්ත" },
+    { word: "じどうしゃ", romaji: "jidousha", synonym: "くるま", sinhala: "මෝටර් රථය" },
+    { word: "ぶっか", romaji: "bukka", synonym: "ねだん", sinhala: "බඩු මිල" },
+    { word: "てんさい", romaji: "tensai", synonym: "あたまが いいです", sinhala: "දක්ෂ" },
+    { word: "せかい", romaji: "sekai", synonym: "ちきゅう", sinhala: "ලෝකය" },
+    { word: "もちろん", romaji: "mochiron", synonym: "きっと、 ぜひ", sinhala: "අනිවාර්යෙන්ම" },
+    { word: "あまり", romaji: "amari", synonym: "そんなに、 しか、 なかなか", sinhala: "එතරම්" },
+    { word: "でも", romaji: "demo", synonym: "しかし、 けど、 ＿が", sinhala: "නමුත් / ඒත්" },
+    { word: "おひさしぶりです", romaji: "ohisashiburi desu", synonym: "ながい じかん あとで あいます", sinhala: "ගොඩ කාලෙකින්" },
+    { word: "みんなで", romaji: "minna de", synonym: "いっしょに", sinhala: "ඔක්කොම එකට" },
+    { word: "おなかが いっぱいです", romaji: "onaka ga ippai desu", synonym: "たべたくない です", sinhala: "බඩ පිරිලා" },
+    { word: "つとめます", romaji: "tsutomemasu", synonym: "はたらきます、 しごとを します", sinhala: "සේවය කරනවා" },
+    { word: "せんたくします", romaji: "sentakushimasu", synonym: "あらいます、 ふくを きれいに します", sinhala: "රෙදි සෝදනවා" },
+    { word: "そうじします", romaji: "soujishimasu", synonym: "へやを きれいに します", sinhala: "පිරිසිදු කරනවා" },
+    { word: "さんぽします", romaji: "sanposhimasu", synonym: "あるきます", sinhala: "ඇවිදින්න යනවා" },
+    { word: "ごご", romaji: "gogo", synonym: "ゆうがた", sinhala: "පස්වරුව / හවස" },
+    { word: "ゆうべ", romaji: "yuube", synonym: "きのうの ばん / よる", sinhala: "ඊයේ රෑ" },
+    { word: "わるい てんきです", romaji: "warui tenki desu", synonym: "あめ です、 ゆき、 くもり", sinhala: "නරක කාලගුණය" },
+    { word: "いい てんきです", romaji: "ii tenki desu", synonym: "はれ です", sinhala: "හොඳ කාලගුණය" },
+    { word: "じょうぶ", romaji: "joubu", synonym: "つよい、 ちから、 よわくない", sinhala: "ශක්තිමත්" },
+    { word: "やおや", romaji: "yaoya", synonym: "やさいの みせ", sinhala: "එළවළු කඩය" },
+    { word: "じょうず", romaji: "jouzu", synonym: "とくい、 へた じゃ / ではありません", sinhala: "දක්ෂ" },
+    { word: "たんじょうび", romaji: "tanjoubi", synonym: "せいねんがっぴ、 うまれた日", sinhala: "උපන් දිනය" },
+    { word: "にぎやか", romaji: "nigiyaka", synonym: "こんでいます、 おおぜい、 ひとが おおいです", sinhala: "ඝෝෂාකාරී / සෙනඟ ගැවසෙන" },
+    { word: "しずか", romaji: "shizuka", synonym: "にぎやか じゃ / ではありません", sinhala: "නිශ්ශබ්ද" },
+    { word: "けっこんして います", romaji: "kekkonshite imasu", synonym: "どくしん じゃ / ではありません", sinhala: "විවාහකයි" },
+    { word: "いちど", romaji: "ichido", synonym: "いっかい", sinhala: "එක් වතාවක්" },
+    { word: "むり", romaji: "muri", synonym: "とても たいへん", sinhala: "කරන්න බැහැ / අමාරුයි" },
+    { word: "ざんぎょうします", romaji: "zangyoushimasu", synonym: "オーバーワーク", sinhala: "අතිකාල වැඩ කරනවා" },
+    { word: "きんえん", romaji: "kin'en", synonym: "たばこを すわない ところ", sinhala: "දුම්පානය තහනම්" },
+    { word: "ところ", romaji: "tokoro", synonym: "ばしょ", sinhala: "ස්ථානය" },
+    { word: "うわぎ", romaji: "uwagi", synonym: "スーツ、 コート、 セーター", sinhala: "කබාය / උඩට අඳින ඇඳුම" },
+    { word: "すいえい", romaji: "suiei", synonym: "およぎます", sinhala: "පිහිනීම" },
+    { word: "ほしい", romaji: "hoshii", synonym: "もらいたい", sinhala: "අවශ්‍යයි / ඕනෙ" },
+    { word: "しゅうまつ", romaji: "shuumatsu", synonym: "どにち 「どようび と にちようび」", sinhala: "සති අන්තය" },
+    { word: "ストア", romaji: "sutoa", synonym: "みせ", sinhala: "කඩය / වෙළඳසැල" },
+    { word: "にくや", romaji: "nikuya", synonym: "にくの みせ", sinhala: "මස් කඩය" },
+    { word: "さかなや", romaji: "sakanaya", synonym: "さかなの みせ", sinhala: "මාළු කඩය" },
+    { word: "はなや", romaji: "hanaya", synonym: "はなの みせ", sinhala: "මල් කඩය" },
+    { word: "ほんや", romaji: "honya", synonym: "ほんの みせ", sinhala: "පොත් කඩය" },
+    { word: "ほんだな", romaji: "hondana", synonym: "ほんを おく ところ", sinhala: "පොත් රාක්කය" },
+    { word: "ふくや", romaji: "fukuya", synonym: "ふくの みせ", sinhala: "ඇඳුම් කඩය" },
+    { word: "くつや", romaji: "kutsuya", synonym: "くつの みせ", sinhala: "සපත්තු කඩය" },
+    { word: "のどが かわきました", romaji: "nodo ga kawakimashita", synonym: "みずを のみたい です", sinhala: "තිබහයි" },
+    { word: "おなかが すきました", romaji: "onaka ga sukimashita", synonym: "ごはんを たべたい です", sinhala: "බඩගිනියි" },
+    { word: "りょうしん", romaji: "ryoushin", synonym: "ちち と はは", sinhala: "දෙමව්පියන්" },
+    { word: "きょうだい", romaji: "kyoudai", synonym: "あに と あね / おとうと と いもうと", sinhala: "සහෝදර සහෝදරියන්" },
+    { word: "いちども", romaji: "ichidomo", synonym: "ぜんぜん", sinhala: "කිසිසේත්ම නැහැ" },
+    { word: "はやく", romaji: "hayaku", synonym: "おそくない、 はやい", sinhala: "ඉක්මනින්" },
+    { word: "ちかい", romaji: "chikai", synonym: "とおくない、 そば、 ちかく、 へん", sinhala: "ළඟ" },
+    { word: "あたらしい", romaji: "atarashii", synonym: "ふるくない", sinhala: "අලුත්" },
+    { word: "わるい", romaji: "warui", synonym: "よくない", sinhala: "නරක" },
+    { word: "たかい", romaji: "takai", synonym: "やすくない", sinhala: "ගණන් වැඩි / උස" },
+    { word: "あつい", romaji: "atsui", synonym: "さむくない", sinhala: "උණුසුම්" },
+    { word: "つまらない", romaji: "tsumaranai", synonym: "おもしろくない", sinhala: "කම්මැලි" },
+    { word: "いそがしい", romaji: "isogashii", synonym: "ひま じゃ / ではありません", sinhala: "කාර්යබහුල" },
+    { word: "げんき", romaji: "genki", synonym: "びょうき じゃ / ではありません", sinhala: "සනීපෙන් ඉන්නවා" },
+    { word: "チケット", romaji: "chiketto", synonym: "きっぷ", sinhala: "ටිකට් පත" },
+    { word: "わかりました", romaji: "wakarimashita", synonym: "かしこまりました", sinhala: "තේරුණා" },
+    { word: "すーぱー、 デパート", romaji: "suupaa, depaato", synonym: "かいもの する おおきい ところ", sinhala: "සාප්පු සංකීර්ණය" },
+    { word: "ぎんこう", romaji: "ginkou", synonym: "おかねを おろす ところ", sinhala: "බැංකුව" },
+    { word: "トイレ", romaji: "toire", synonym: "おてあらい", sinhala: "වැසිකිළිය" },
+    { word: "バッグ", romaji: "baggu", synonym: "かばん、 ふくろ", sinhala: "බෑගය/මල්ල" },
+    { word: "おみやげ", romaji: "omiyage", synonym: "プレゼント", sinhala: "තෑග්ග / සිහිවටනය" },
+    { word: "あかるい", romaji: "akarui", synonym: "くらくない", sinhala: "දීප්තිමත් / එළිය" },
+    { word: "じゅうぎょう", romaji: "juugyou", synonym: "きょうしつ、 クラス", sinhala: "පන්තිය / පාඩම" },
+    { word: "きょうかしょ", romaji: "kyoukasho", synonym: "テキスト、 じゅうぎょうで つかう ほん", sinhala: "පාසල් පෙළපොත" },
+    { word: "ようじ", romaji: "youji", synonym: "しごと", sinhala: "රාජකාරිය / වැඩක්" },
+    { word: "あんぜん", romaji: "anzen", synonym: "あぶなくない", sinhala: "ආරක්ෂිත" },
+    { word: "いえ", romaji: "ie", synonym: "うち、 すんで いる ところ", sinhala: "නිවස / ගෙදර" },
+    { word: "かしゅ", romaji: "kashu", synonym: "うたを うたいます", sinhala: "ගායකයා / ගායිකාව" },
+    { word: "コップ", romaji: "koppu", synonym: "ビールを のむ", sinhala: "වීදුරුව" },
+    { word: "カップ", romaji: "kappu", synonym: "コーヒー、 こちゃを のむ", sinhala: "කෝප්පය" },
+    { word: "ペット", romaji: "petto", synonym: "どうぶつ", sinhala: "සුරතල් සතා" },
+    { word: "おどります", romaji: "odorimasu", synonym: "ダンスを します", sinhala: "නටනවා" },
+    { word: "おくれます", romaji: "okuremasu", synonym: "まにあいません", sinhala: "ප්‍රමාද වෙනවා / පරක්කු වෙනවා" },
+    { word: "つもり", romaji: "tsumori", synonym: "もくてき、 ゆめ", sinhala: "අදහස / සැලසුම" },
+    { word: "おまわりさん", romaji: "omawarisan", synonym: "けいかん、 けいさつ", sinhala: "පොලිස් නිලධාරියා" },
+    { word: "あした か あさって", romaji: "ashita ka asatte", synonym: "あした でも あさって でも いいです", sinhala: "හෙට හෝ අනිද්දා" },
+    { word: "すぎ", romaji: "sugi", synonym: "あとで", sinhala: "පසුව" },
+    { word: "しつもん", romaji: "shitsumon", synonym: "もんだい、 わからない こと", sinhala: "ප්‍රශ්නය" },
+    { word: "せまい", romaji: "semai", synonym: "ひろくない、 ちいさい", sinhala: "පටු / ඉඩකඩ අඩු" },
+    { word: "ゆっくり", romaji: "yukkuri", synonym: "おそい", sinhala: "සෙමින් / හිමින්" },
+    { word: "おととし", romaji: "ototoshi", synonym: "2ねん まえ", sinhala: "අවුරුදු දෙකකට පෙර" },
+    { word: "せんせんげつ", romaji: "sensengetsu", synonym: "2かげつ まえ", sinhala: "මාස දෙකකට පෙර" },
+    { word: "せんせんしゅう", romaji: "sensenshuu", synonym: "2しゅうかん まえ", sinhala: "සති දෙකකට පෙර" },
+    { word: "はんとし", romaji: "hantoshi", synonym: "6かげつ", sinhala: "මාස හයක්" },
+    { word: "さらいねん", romaji: "sarainen", synonym: "2ねん ご / あとで", sinhala: "තව අවුරුදු දෙකකින්" },
+    { word: "さらいげつ", romaji: "saraigetsu", synonym: "2かげつ ご / あとで", sinhala: "තව මාස දෙකකින්" },
+    { word: "さらいしゅう", romaji: "saraishuu", synonym: "2しゅうかん ご / あとで", sinhala: "තව සති දෙකකින්" }
+];
+
 // DOM Elements
 const homeScreen = document.getElementById('home-screen');
 const selectSetScreen = document.getElementById('select-set-screen');
@@ -170,6 +306,8 @@ const endScreen = document.getElementById('end-screen');
 
 const btnStudy = document.getElementById('btn-study');
 const btnPractice = document.getElementById('btn-practice');
+const btnStudySynonyms = document.getElementById('btn-study-synonyms');
+const btnPracticeSynonyms = document.getElementById('btn-practice-synonyms');
 const btnBackFromSelect = document.getElementById('btn-back-from-select');
 const btnBackFromStudy = document.getElementById('btn-back-from-study');
 const btnBackFromPractice = document.getElementById('btn-back-from-practice');
@@ -197,6 +335,7 @@ let currentIndex = 0;
 let score = 0;
 let currentCorrectAnswer = null;
 let currentMode = ''; // 'study' or 'practice'
+let currentDataType = 'verbs'; // 'verbs' or 'synonyms'
 let currentSetStartIndex = 0;
 let currentSetEndIndex = 0;
 
@@ -206,15 +345,14 @@ function showScreen(screenEl) {
     screenEl.classList.add('active');
 }
 
-// Initialization
-document.addEventListener('DOMContentLoaded', () => {
-    // Generate Set Buttons
+function generateSetButtons(dataArray) {
+    setListContainer.innerHTML = '';
     const setSize = 20;
-    const numSets = Math.ceil(vocabulary.length / setSize);
+    const numSets = Math.ceil(dataArray.length / setSize);
     
     for (let i = 0; i < numSets; i++) {
         const start = i * setSize;
-        const end = Math.min((i + 1) * setSize, vocabulary.length);
+        const end = Math.min((i + 1) * setSize, dataArray.length);
         
         const btn = document.createElement('button');
         btn.className = 'secondary-btn';
@@ -222,17 +360,40 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => selectSet(start, end));
         setListContainer.appendChild(btn);
     }
+}
 
+// Initialization
+document.addEventListener('DOMContentLoaded', () => {
     // Event Listeners
     btnStudy.addEventListener('click', () => {
         currentMode = 'study';
-        selectSetTitle.textContent = 'Select Study Set';
+        currentDataType = 'verbs';
+        selectSetTitle.textContent = 'Select Study Set (Verbs)';
+        generateSetButtons(vocabulary);
         showScreen(selectSetScreen);
     });
     
     btnPractice.addEventListener('click', () => {
         currentMode = 'practice';
-        selectSetTitle.textContent = 'Select Practice Set';
+        currentDataType = 'verbs';
+        selectSetTitle.textContent = 'Select Practice Set (Verbs)';
+        generateSetButtons(vocabulary);
+        showScreen(selectSetScreen);
+    });
+    
+    btnStudySynonyms.addEventListener('click', () => {
+        currentMode = 'study';
+        currentDataType = 'synonyms';
+        selectSetTitle.textContent = 'Select Study Set (Synonyms)';
+        generateSetButtons(synonymsData);
+        showScreen(selectSetScreen);
+    });
+
+    btnPracticeSynonyms.addEventListener('click', () => {
+        currentMode = 'practice';
+        currentDataType = 'synonyms';
+        selectSetTitle.textContent = 'Select Practice Set (Synonyms)';
+        generateSetButtons(synonymsData);
         showScreen(selectSetScreen);
     });
     
@@ -259,19 +420,38 @@ function selectSet(start, end) {
 
 function renderStudySet(start, end) {
     vocabListContainer.innerHTML = '';
-    const subset = vocabulary.slice(start, end);
+    const dataArray = currentDataType === 'verbs' ? vocabulary : synonymsData;
+    const subset = dataArray.slice(start, end);
     subset.forEach((word, index) => {
         const actualIndex = start + index;
-        const jpText = word.kanji !== word.hiragana ? `${word.kanji} (${word.hiragana})` : word.hiragana;
         const item = document.createElement('div');
         item.className = 'vocab-item';
-        item.innerHTML = `
-            <div class="vocab-kanji"><span class="vocab-number" style="color:#aaa;font-size:0.8em;">${actualIndex + 1}. </span>${jpText}</div>
-            <div class="vocab-romaji">${word.romaji}</div>
-            <div class="vocab-sinhala">${word.sinhala}</div>
-        `;
+        
+        if (currentDataType === 'verbs') {
+            const jpText = word.kanji !== word.hiragana ? `${word.kanji} (${word.hiragana})` : word.hiragana;
+            item.innerHTML = `
+                <div class="vocab-kanji"><span class="vocab-number" style="color:#aaa;font-size:0.8em;">${actualIndex + 1}. </span>${jpText}</div>
+                <div class="vocab-romaji">${word.romaji}</div>
+                <div class="vocab-sinhala">${word.sinhala}</div>
+            `;
+        } else {
+            item.innerHTML = `
+                <div class="vocab-kanji" style="display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
+                    <div><span class="vocab-number" style="color:#aaa;font-size:0.8em;">${actualIndex + 1}. </span>${word.word}</div>
+                    <div style="color: #059669; font-weight: 600; font-size: 0.75em; margin-left: 8px; background: rgba(5,150,105,0.1); padding: 3px 10px; border-radius: 16px; border: 1px solid rgba(5,150,105,0.2); display: flex; align-items: center;">= ${word.synonym}</div>
+                </div>
+                <div class="vocab-romaji" style="margin-top: 6px;">${word.romaji}</div>
+                <div class="vocab-sinhala">${word.sinhala}</div>
+            `;
+        }
+        
         vocabListContainer.appendChild(item);
     });
+    
+    const studyTitle = document.getElementById('study-screen-title');
+    if (studyTitle) {
+        studyTitle.textContent = currentDataType === 'verbs' ? 'Study Verbs' : 'Study Synonyms';
+    }
 }
 
 // Game Logic
@@ -290,7 +470,8 @@ function startGame(start = currentSetStartIndex, end = currentSetEndIndex) {
     scoreEl.textContent = score;
     
     // Select random questions for the selected set
-    const subset = vocabulary.slice(start, end);
+    const dataArray = currentDataType === 'verbs' ? vocabulary : synonymsData;
+    const subset = dataArray.slice(start, end);
     currentQuestions = shuffleArray(subset);
     
     showScreen(practiceScreen);
@@ -309,16 +490,24 @@ function loadNextQuestion() {
     const currentWord = currentQuestions[currentIndex];
     currentCorrectAnswer = currentWord;
     
-    // Update Question UI - User wants to see Hiragana
-    questionKanji.textContent = currentWord.hiragana;
-    questionRomaji.textContent = currentWord.romaji;
+    // Update Question UI
+    if (currentDataType === 'verbs') {
+        questionKanji.textContent = currentWord.hiragana;
+        questionRomaji.textContent = currentWord.romaji;
+    } else {
+        questionKanji.textContent = currentWord.word;
+        questionRomaji.textContent = currentWord.romaji;
+    }
     
     // Update Progress
     const progressPercent = (currentIndex / currentQuestions.length) * 100;
     progressFill.style.width = `${progressPercent}%`;
 
     // Generate Options
-    let incorrectWords = vocabulary.filter(w => w.hiragana !== currentWord.hiragana);
+    const dataArray = currentDataType === 'verbs' ? vocabulary : synonymsData;
+    const matchKey = currentDataType === 'verbs' ? 'hiragana' : 'word';
+    
+    let incorrectWords = dataArray.filter(w => w[matchKey] !== currentWord[matchKey]);
     incorrectWords = shuffleArray(incorrectWords).slice(0, 3);
     
     let options = [currentWord, ...incorrectWords];
@@ -327,17 +516,23 @@ function loadNextQuestion() {
     options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.innerHTML = `
-            <div>${opt.sinhala}</div>
-        `;
-        btn.addEventListener('click', () => handleAnswer(opt, btn));
+        
+        if (currentDataType === 'verbs') {
+            btn.innerHTML = `<div>${opt.sinhala}</div>`;
+        } else {
+            btn.innerHTML = `
+                <div style="font-size: 1.2rem; font-weight: 500; color: #10b981; margin-bottom: 4px;">${opt.synonym}</div>
+                <div style="font-size: 0.95rem; color: var(--text-muted);">${opt.sinhala}</div>
+            `;
+        }
+        
+        btn.dataset.correct = (opt[matchKey] === currentWord[matchKey]).toString();
+        btn.addEventListener('click', () => handleAnswer(btn.dataset.correct === 'true', btn));
         optionsContainer.appendChild(btn);
     });
 }
 
-function handleAnswer(selectedOpt, selectedBtn) {
-    const isCorrect = selectedOpt.hiragana === currentCorrectAnswer.hiragana;
-    
+function handleAnswer(isCorrect, selectedBtn) {
     // Disable all buttons
     const allBtns = optionsContainer.querySelectorAll('.option-btn');
     allBtns.forEach(btn => btn.disabled = true);
@@ -350,7 +545,7 @@ function handleAnswer(selectedOpt, selectedBtn) {
         selectedBtn.classList.add('wrong');
         // Find and highlight correct answer
         allBtns.forEach(btn => {
-            if (btn.querySelector('div').textContent === currentCorrectAnswer.sinhala) {
+            if (btn.dataset.correct === 'true') {
                 btn.classList.add('correct');
             }
         });

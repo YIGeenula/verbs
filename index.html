@@ -24,11 +24,14 @@
             
             <div id="home-screen" class="screen active">
                 <div class="icon-wrapper">🎮</div>
-                <h2 style="text-align: center;">Nihongo Verbs</h2>
+                <h2 style="text-align: center;">Nihongo Learning</h2>
                 <p style="text-align: center;">Choose an option below to start.</p>
                 <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 30px; width: 100%;">
                     <button id="btn-study" class="primary-btn">📚 Study Verbs</button>
                     <button id="btn-practice" class="secondary-btn">🎯 Practice Verbs (Game)</button>
+                    <div style="height: 1px; background: rgba(0,0,0,0.1); margin: 5px 0;"></div>
+                    <button id="btn-study-synonyms" class="primary-btn" style="background: #10b981; box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);">📖 Study Synonyms</button>
+                    <button id="btn-practice-synonyms" class="secondary-btn">🧩 Practice Synonyms (Game)</button>
                 </div>
             </div>
 
@@ -45,7 +48,7 @@
             <div id="study-screen" class="screen scrollable-screen" style="flex: 1;">
                 <div class="header-actions">
                     <button id="btn-back-from-study" class="icon-btn">← Back</button>
-                    <h2>Study Verbs</h2>
+                    <h2 id="study-screen-title">Study Verbs</h2>
                 </div>
                 <div id="vocab-list-container" class="vocab-list">
                     <!-- Injected via JS -->
